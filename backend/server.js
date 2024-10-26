@@ -1,6 +1,6 @@
 // /backend/server.js
 require('dotenv').config();
-console.log("Mongo URI:", process.env.MONGO_URI); // Debe mostrar la URI completa
+console.log("Mongo URI:", process.env.MONGO_URI);
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');

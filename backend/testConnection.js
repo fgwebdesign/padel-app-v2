@@ -1,15 +1,19 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
 
-const testConnection = async () => {
+const uri = 'mongodb+srv://fgwebdesign0:nqr2zA4lTrSzh68b@padelcluster.0srhz.mongodb.net/padelApp?retryWrites=true&w=majority';
+
+async function run() {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("Conexión exitosa a MongoDB.");
-    process.exit(0);
-  } catch (err) {
-    console.error("Error al conectar con MongoDB:", err.message);
-    process.exit(1);
+    const client = new MongoClient(uri, {
+      serverSelectionTimeoutMS: 30000, 
+      tls: true, 
+    });
+    await client.connect();
+    console.log("Conectado a MongoDB!");
+    await client.close();
+  } catch (error) {
+    console.error("Error al conectar con MongoDB:", error);
   }
-};
+}
 
-testConnection();
+run();
